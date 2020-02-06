@@ -1,0 +1,75 @@
+<template>
+    <v-app id="inspire">
+        <v-navigation-drawer
+            v-model="drawer"
+            app
+            clipped
+        >
+            <v-list dense>
+            <v-list-item link>
+                <v-list-item-action>
+                <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                <v-list-item-title>Dashboard</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item link>
+                <v-list-item-action>
+                <v-icon>mdi-settings</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                <v-list-item-title>Settings</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+
+        <v-app-bar
+            app
+            clipped-left
+        >
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+            <v-toolbar-title>Application</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon v-on:click="changeColor">
+            <v-icon>mdi-invert-colors</v-icon>
+            </v-btn>
+        </v-app-bar>
+
+        <v-content>
+            <v-app>
+                <v-content>
+                <router-view></router-view>
+                </v-content>
+            </v-app>
+        </v-content>
+        <v-footer app>
+            <span>&copy; 2019</span>
+        </v-footer>
+    </v-app>
+</template>
+
+<script>
+export default {
+    props: {
+        source: String,
+    },
+
+    data: () => ({
+			drawer: null,
+			isDark: true
+		}),
+		
+		methods: {
+			changeColor() {
+				this.isDark = this.isDark?false:true;
+				this.$vuetify.theme.dark = this.isDark;
+			}
+		},
+
+    created () {
+        this.$vuetify.theme.dark = this.isDark
+    },
+}
+</script>
