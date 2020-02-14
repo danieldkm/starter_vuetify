@@ -1,23 +1,16 @@
 import Vue from 'vue'
-import VueRouter from "vue-router";
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
-import Home from './components/Home.vue';
+import router from './router'
+import store from './store'
+import { VueReCaptcha } from 'vue-recaptcha-v3'
 
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  routes: [
-    {
-      path: "/home",
-			component: Home
-		},
-	]
-});
+Vue.use(VueReCaptcha, { siteKey: '6LdnH8cUAAAAAFTsfCqN722Mb3eSvYDn7qOtQ4sS' })
 
 Vue.config.productionTip = false
 new Vue({
+  router,
+  store,
   vuetify,
-  router: router,
   render: h => h(App)
 }).$mount('#app')
